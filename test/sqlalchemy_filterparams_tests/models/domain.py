@@ -10,7 +10,7 @@ from .base import Base
 
 
 class Domain(Base):
-     __tablename__ = 'domain'
+    __tablename__ = 'domain'
 
-     id = Column(Integer, primary_key=True)
-     domain = Column(Unicode)
+    id = Column(Integer, primary_key=True)
+    domain = Column(Unicode)
