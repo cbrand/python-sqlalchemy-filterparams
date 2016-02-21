@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 
-from sqlalchemy import Column, String
+from sqlalchemy import String
 
 from .util import convert, is_type
 
@@ -77,7 +77,6 @@ class GreaterEqualFilter(Filter):
 
 
 class _LikeBase(Filter):
-
     def apply(self, param, value):
         if not is_type(param.type, String):
             raise ValueError(

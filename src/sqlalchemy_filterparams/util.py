@@ -37,8 +37,8 @@ def parse_time(time_string):
 def parse_decimal(decimal_string):
     try:
         return Decimal(decimal_string)
-    except InvalidOperation as e:
-        raise ValueError(e)
+    except InvalidOperation as exception:
+        raise ValueError(exception)
 
 
 DEFAULT_CONVERTERS = {

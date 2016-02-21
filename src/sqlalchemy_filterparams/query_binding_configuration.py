@@ -12,7 +12,6 @@ class QueryBindingConfiguration:
         'for': None,
         'sessionmaker': None,
         'binding': {},
-        'joins' : {},
         'converters': None,
         'filters': None,
     }
@@ -29,9 +28,10 @@ class QueryBindingConfiguration:
         if configuration and configuration.get('for', None) is not None:
             model = configuration['for']
         else:
-            for cl in cls.__bases__:
-                if getattr(cl, 'model', None) and callable(cl.model):
-                    model = cl.model()
+            for model_cl in cls.__bases__:
+                model_present = getattr(model_cl, 'model', None)
+                if model_present and callable(model_cl.model):
+                    model = model_cl.model()
 
                 if model is not None:
                     break
@@ -82,7 +82,6 @@ class QueryBindingConfiguration:
     def expression_handler(self):
         return ExpressionHandler(
             self.config_entry('binding'),
-            self.config_entry('joins'),
             self.model(),
         )
 
