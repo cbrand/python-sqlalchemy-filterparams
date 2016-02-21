@@ -18,7 +18,7 @@ class ExpressionHandler:
 
     def get_filter_expression(self, query, name):
         join_path = self.path_to(name)
-        query, base = self._evaluate_join_path(
+        query = self._evaluate_join_path(
             query,
             join_path,
         )
@@ -55,9 +55,9 @@ class ExpressionHandler:
                     None
                 )
                 if (not hasattr(relation, 'property') or
-                    not hasattr(relation.property, 'mapper') or
-                    not hasattr(relation.property.mapper, 'class_')
-                ):
+                        not hasattr(relation.property, 'mapper') or
+                        not hasattr(
+                            relation.property.mapper, 'class_')):
                     raise ValueError(
                         (
                             'The specified join path '
@@ -73,7 +73,7 @@ class ExpressionHandler:
 
                 self._join_cache[current_path] = aliased_join_cl
             current_base = self._join_cache[current_path]
-        return query, current_base
+        return query
 
 
 class ExpressionItem:

@@ -80,7 +80,7 @@ class Evaluation:
 
     def _process_parameter(self, item, sql_query):
         expressions = self.query_config.expressions
-        query, expression = expressions.get_filter_expression(
+        sql_query, expression = expressions.get_filter_expression(
             sql_query,
             item.name
         )

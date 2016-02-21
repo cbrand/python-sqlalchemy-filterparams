@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 
-from .filters import default_filters
-from .util import default_converters
+from .filters import DEFAULT_FILTERS
+from .util import DEFAULT_CONVERTERS
 
 
 class QueryConfig:
@@ -23,7 +23,7 @@ class QueryConfig:
     @converters.setter
     def converters(self, value):
         if value is None:
-            value = default_converters.copy()
+            value = DEFAULT_CONVERTERS.copy()
         self._converters = value
 
     @property
@@ -33,7 +33,7 @@ class QueryConfig:
     @filters.setter
     def filters(self, value):
         if value is None:
-            value = default_filters
+            value = DEFAULT_FILTERS
         self._filters = dict(
             (filter_obj.name, filter_obj)
             for filter_obj in value

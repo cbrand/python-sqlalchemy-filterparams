@@ -100,7 +100,7 @@ class ILikeFilter(_LikeBase):
         return param.ilike(value)
 
 
-default_filters = [
+DEFAULT_FILTERS = [
     EqFilter,
     NeqFilter,
     LesserFilter,

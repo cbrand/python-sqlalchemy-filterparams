@@ -6,10 +6,10 @@ from sqlalchemy import Integer
 
 from sqlalchemy_filterparams.filters import (
     EqFilter,
-    default_filters,
+    DEFAULT_FILTERS,
 )
 from sqlalchemy_filterparams.util import (
-    default_converters
+    DEFAULT_CONVERTERS
 )
 from sqlalchemy_filterparams.query_config import (
     QueryConfig
@@ -18,10 +18,10 @@ from sqlalchemy_filterparams.query_config import (
 
 def test_use_default_filters():
     config_filters = list(QueryConfig().filters.values())
-    expect(len(config_filters)).to(equal(len(default_filters)))
+    expect(len(config_filters)).to(equal(len(DEFAULT_FILTERS)))
 
     for filter_obj in config_filters:
-        expect(default_filters).to(contain(filter_obj))
+        expect(DEFAULT_FILTERS).to(contain(filter_obj))
 
 
 def test_set_filters():
@@ -32,7 +32,7 @@ def test_set_filters():
 
 
 def test_use_default_converters():
-    expect(QueryConfig().converters).to(equal(default_converters))
+    expect(QueryConfig().converters).to(equal(DEFAULT_CONVERTERS))
 
 
 def test_set_converters():
