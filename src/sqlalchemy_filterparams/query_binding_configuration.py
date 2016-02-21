@@ -1,8 +1,11 @@
 # -*- encoding: utf-8 -*-
 
+from filterparams import build_parser
 from filterparams.obj import Query
+
 from .evaluation import Evaluation
 from .expression import ExpressionHandler
+from .filters import DEFAULT_FILTERS
 from .query_config import QueryConfig
 
 
@@ -14,11 +17,12 @@ class QueryBindingConfiguration:
         'binding': {},
         'converters': None,
         'filters': None,
+        'default_filter': None,
     }
 
-    def __init__(self, **kwargs):
+    def __init__(self, session=None):
         self.__cached_model = None
-        self._session = kwargs.get('session', None)
+        self._session = session
 
     @classmethod
     def model(cls):
@@ -48,8 +52,8 @@ class QueryBindingConfiguration:
                 continue
             seen.add(candidate)
 
-            if hasattr(cls, '__config__'):
-                config = cls.__config__
+            if hasattr(candidate, '__config__'):
+                config = candidate.__config__
                 if name in config:
                     return config[name]
             else:
@@ -104,10 +108,29 @@ class QueryBindingConfiguration:
 
         return query
 
+    @property
+    def _filters(self):
+        return self.config_entry('filters') or DEFAULT_FILTERS
+
+    @property
+    def _default_filter(self):
+        return self.config_entry('default_filter') or 'eq'
+
+    @property
+    def _filter_names(self):
+        return [
+            filter_obj.name
+            for filter_obj in self._filters
+        ]
+
+    def evaluate_params(self, params):
+        parser = build_parser(self._filter_names, self._default_filter)
+        return self.evaluate(parser(params))
+
     def evaluate(self, filterparams_query: Query):
-        Evaluation(
+        return Evaluation(
             self.config_with(filterparams_query)
-        ).evaluate(filterparams_query)
+        ).evaluate(self._base_query)
 
     def config_with(self, query):
         query_config = QueryConfig()

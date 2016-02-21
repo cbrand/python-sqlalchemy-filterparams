@@ -35,9 +35,7 @@ class Evaluation:
                 sql_query,
             )
 
-            sql_query = sql_query.filter(
-                item
-            )
+            sql_query = sql_query.filter(item)
 
         return sql_query
 
