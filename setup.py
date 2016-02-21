@@ -6,15 +6,30 @@ from setuptools import setup, find_packages
 from distutils.command.build_py import build_py as _build_py
 
 
-setup_requires = []
+setup_requires = [
+    'nose',
+]
+
+tests_require = [
+    'nosexcover',
+    'expects',
+    'factory_boy',
+]
 
 requires = [
     'filterparams>=1.0.2',
+    'SQLAlchemy',
+    'python-dateutil',
 ]
+
 
 VERSION = '1.0.0'
 
 cmd_class = {}
+
+
+def is_py2():
+    return sys.version_info[0] < 3
 
 
 def match_patterns(path, pattern_list=None):
@@ -92,7 +107,7 @@ except ImportError:
     NO_NOSE = True
 
 
-if sys.version_info[0] < 3:
+if is_py2():
     setup_requires.append('pip')
     cmd_class['build_py'] = build_py27
 
@@ -143,6 +158,7 @@ setup(
     zip_safe=False,
     setup_requires=setup_requires,
     install_requires=requires,
+    tests_require=tests_require,
     url='https://github.com/cbrand/python-sqlalchemy-filterparams',
     download_url='https://github.com/cbrand/'
                  'python-sqlalchemy-filterparams/tarball/%s' % VERSION,
