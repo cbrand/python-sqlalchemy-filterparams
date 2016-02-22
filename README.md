@@ -156,7 +156,7 @@ class Domain(Base):
 
     id = Column(Integer, primary_key=True)
     domain = Column(Unicode)
-``
+```
 
 Then a definition would look like (given that the `BasicQueryBinding` class is present):
 
