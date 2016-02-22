@@ -71,6 +71,7 @@ Some things to note here:
     - `Date` - converting to `datetime.date`
     - `DateTime` - converting to `datetime.datetime`
     - `Time` - converting to `datetime.time`
+
   The dates are parsed through the functionality provided by 
   [`python-dateutil`](https://pypi.python.org/pypi/python-dateutil/).
   You can access the default filters through 
