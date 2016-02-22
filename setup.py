@@ -146,6 +146,7 @@ setup(
         "Programming Language :: Python :: 3.4",
         "Programming Language :: Python :: 3.5",
         "License :: OSI Approved :: MIT License",
+        "Topic :: Database",
     ],
     author='Christoph Brand',
     author_email='christoph@brand.rest',
