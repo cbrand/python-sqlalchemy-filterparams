@@ -7,6 +7,12 @@ maps it on top of SQLAlchemy.
 
 It can be used to integrate query capabilities to RESTful APIs.
 
+## Note ##
+
+To use and understand this package please first read the information
+provided by the [filterparams](https://github.com/cbrand/python-filterparams)
+package.
+
 ## Installation ##
 
 The project is available on [pypi](https://pypi.python.org/pypi/sqlalchemy-filterparams). 
